@@ -10,10 +10,23 @@
         "strictFunctionTypes": true,
         "types": [],
         "noEmit": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "jsx": "preserve",
+        "paths": {
+            "@idev-coder/rex/client": [
+                "./rex-client.d.ts"
+            ],
+            "@idev-coder/rex": [
+                "./index.d.ts"
+            ]
+        }
     },
     "files": [
         "index.d.ts",
-        "core.d.ts"
+        "core.d.ts",
+        "jsx-dev-runtime.d.ts",
+        "jsx-runtime.d.ts",
+        "global.d.ts",
+        "rex-client.d.ts"
     ]
 }

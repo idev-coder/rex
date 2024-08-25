@@ -1,4 +1,4 @@
-/// <reference path="./rex-client-global.d.ts" />
+/// <reference path="./global.d.ts" />
 
 import * as CSS from "csstype";
 import * as PropTypes from "prop-types";
