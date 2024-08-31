@@ -4,11 +4,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "lint": "eslint .",
-    "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/",
-    "test-ci": "nyc --exclude examples --exclude test --exclude benchmarks --reporter=lcovonly --reporter=text npm test",
-    "test-cov": "nyc --exclude examples --exclude test --exclude benchmarks --reporter=html --reporter=text npm test",
-    "test-tap": "mocha --require test/support/env --reporter tap --check-leaks test/ test/acceptance/"
+    "lint": "eslint ."
   },
   "keywords": [
     "rex",
@@ -68,7 +64,6 @@
   },
   "devDependencies": {
     "ts-loader": "^9.5.1",
-    "ts-mocha": "^10.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "webpack": "^5.94.0",
@@ -85,7 +80,6 @@
     "@jest/globals": "^29.7.0",
     "@types/accepts": "^1.3.7",
     "@types/body-parser": "^1.19.5",
-    "@types/chai": "^4.3.17",
     "@types/content-disposition": "^0.5.8",
     "@types/content-type": "^1.1.8",
     "@types/cookie": "^0.6.0",
@@ -97,7 +91,6 @@
     "@types/finalhandler": "^1.2.3",
     "@types/fresh": "^0.5.2",
     "@types/methods": "^1.1.2",
-    "@types/mocha": "^10.0.7",
     "@types/node": "^22.5.0",
     "@types/on-finished": "^2.3.4",
     "@types/parseurl": "^1.3.3",
@@ -110,9 +103,7 @@
     "@types/scheduler": "^0.16.8",
     "@types/send": "^0.17.4",
     "@types/serve-static": "^1.15.7",
-    "@types/sinon": "^17.0.3",
     "@types/statuses": "^2.0.5",
-    "@types/supertest": "^6.0.2",
     "@types/type-is": "^1.6.6",
     "@types/utils-merge": "^0.0.31",
     "@types/vary": "^1.1.3",
@@ -120,7 +111,6 @@
     "array-flatten": "^3.0.0",
     "babel-loader": "^9.1.3",
     "body-parser": "^1.20.2",
-    "chai": "^5.1.1",
     "content-disposition": "^0.5.4",
     "content-type": "^1.0.5",
     "cookie": "^0.6.0",
@@ -139,7 +129,6 @@
     "lodash.escaperegexp": "^4.1.2",
     "merge-descriptors": "^2.0.0",
     "methods": "^1.1.2",
-    "mocha": "^10.7.3",
     "object-assign": "^4.1.1",
     "on-finished": "^2.4.1",
     "parseurl": "^1.3.3",
@@ -154,9 +143,7 @@
     "send": "^0.18.0",
     "serve-static": "^1.15.0",
     "setprototypeof": "^1.2.0",
-    "sinon": "^18.0.0",
     "statuses": "^2.0.1",
-    "supertest": "^7.0.0",
     "type-is": "^1.6.18",
     "utils-merge": "^1.0.1",
     "vary": "^1.1.2"
