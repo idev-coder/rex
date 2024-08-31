@@ -2,19 +2,19 @@
   "name": "@idev-coder/rex",
   "version": "1.0.0",
   "types": "index.d.ts",
-  "main": "lib/index.cjs.js",
-  "umd:main": "lib/index.umd.js",
-  "esm:main": "lib/index.esm.js",
-  "source": "src/index.js",
+  "main": "lib/index.js",
+  "umd:main": "lib/index.js",
+  "esm:main": "lib/index.js",
+  "source": "lib/index.js",
   "exports": {
     ".": {
       "types": [
         "./index.d.ts",
         "./core.d.ts"
       ],
-      "umd": "./lib/index.umd.js",
-      "import": "./lib/index.esm.js",
-      "require": "./lib/index.cjs.js"
+      "umd": "./lib/index.js",
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
     }
   },
   "scripts": {
@@ -47,7 +47,6 @@
   "files": [
     "Readme.md",
     "lib/",
-    "src/",
     "index.d.ts",
     "core.d.ts",
     "tsconfig.json",
@@ -119,8 +118,6 @@
     "supertest": "6.3.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.5.4",
-    "vhost": "~3.0.2",
-    "webpack": "^5.94.0",
-    "webpack-cli": "^5.1.4"
+    "vhost": "~3.0.2"
   }
 }
