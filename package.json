@@ -1,10 +1,30 @@
 {
   "name": "@idev-coder/rex",
   "version": "1.0.0",
-  "main": "index.js",
   "types": "index.d.ts",
+  "main": "lib/index.cjs.js",
+  "umd:main": "lib/index.umd.js",
+  "esm:main": "lib/index.esm.js",
+  "source": "src/index.js",
+  "exports": {
+    ".": {
+      "types": [
+        "./index.d.ts",
+        "./core.d.ts"
+      ],
+      "umd": "./lib/index.umd.js",
+      "import": "./lib/index.esm.js",
+      "require": "./lib/index.cjs.js"
+    }
+  },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/",
+    "test-ci": "nyc --exclude examples --exclude test --exclude benchmarks --reporter=lcovonly --reporter=text npm test",
+    "test-cov": "nyc --exclude examples --exclude test --exclude benchmarks --reporter=html --reporter=text npm test",
+    "test-tap": "mocha --require test/support/env --reporter tap --check-leaks test/ test/acceptance/",
+    "ex:auth": "node examples/auth/index.js",
+    "build": "webpack"
   },
   "keywords": [
     "rex",
@@ -26,126 +46,81 @@
   "description": "Fast, unopinionated, minimalist web framework",
   "files": [
     "Readme.md",
-    "index.js",
-    "client.js",
+    "lib/",
+    "src/",
     "index.d.ts",
     "core.d.ts",
-    "rex-client.d.ts",
-    "jsx-runtime.d.ts",
-    "jsx-dev-runtime.d.ts",
-    "lib/"
+    "tsconfig.json",
+    ".babelrc",
+    ".eslintrc.yml"
   ],
-  "exports": {
-    ".": {
-      "types": {
-        "default": "./index.d.ts"
-      }
-    },
-    "./rex-client": {
-      "types": {
-        "default": "./rex-client.d.ts"
-      }
-    },
-    "./core": {
-      "types": {
-        "default": "./core.d.ts"
-      }
-    },
-    "./jsx-runtime": {
-      "types": {
-        "default": "./jsx-runtime.d.ts"
-      }
-    },
-    "./jsx-dev-runtime": {
-      "types": {
-        "default": "./jsx-dev-runtime.d.ts"
-      }
-    }
+  "dependencies": {
+    "accepts": "~1.3.8",
+    "array-flatten": "1.1.1",
+    "body-parser": "1.20.2",
+    "buffer": "^6.0.3",
+    "content-disposition": "0.5.4",
+    "content-type": "~1.0.4",
+    "cookie": "0.6.0",
+    "cookie-signature": "1.0.6",
+    "debug": "2.6.9",
+    "depd": "2.0.0",
+    "encodeurl": "~2.0.0",
+    "escape-html": "~1.0.3",
+    "etag": "~1.8.1",
+    "finalhandler": "1.2.0",
+    "fresh": "0.5.2",
+    "http-errors": "2.0.0",
+    "merge-descriptors": "1.0.3",
+    "methods": "~1.1.2",
+    "on-finished": "2.4.1",
+    "parseurl": "~1.3.3",
+    "path-browserify": "^1.0.1",
+    "path-to-regexp": "0.1.8",
+    "proxy-addr": "~2.0.7",
+    "qs": "6.11.0",
+    "range-parser": "~1.2.1",
+    "safe-buffer": "5.2.1",
+    "send": "0.18.0",
+    "serve-static": "1.15.0",
+    "setprototypeof": "1.2.0",
+    "statuses": "2.0.1",
+    "string_decoder": "^1.3.0",
+    "type-is": "~1.6.18",
+    "url": "^0.11.4",
+    "util": "^0.12.5",
+    "utils-merge": "1.0.1",
+    "vary": "~1.1.2"
   },
   "devDependencies": {
-    "ts-loader": "^9.5.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4",
-    "webpack": "^5.94.0",
-    "webpack-cli": "^5.1.4"
-  },
-  "dependencies": {
     "@babel/core": "^7.25.2",
-    "@babel/plugin-transform-flow-strip-types": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
-    "@babel/register": "^7.24.6",
-    "@esbuild-kit/esm-loader": "^2.6.5",
-    "@jest/globals": "^29.7.0",
-    "@types/accepts": "^1.3.7",
     "@types/body-parser": "^1.19.5",
-    "@types/content-disposition": "^0.5.8",
-    "@types/content-type": "^1.1.8",
-    "@types/cookie": "^0.6.0",
-    "@types/cookie-signature": "^1.1.2",
-    "@types/debug": "^4.1.12",
-    "@types/depd": "^1.1.36",
-    "@types/encodeurl": "^1.0.2",
-    "@types/escape-html": "^1.0.4",
-    "@types/finalhandler": "^1.2.3",
-    "@types/fresh": "^0.5.2",
-    "@types/methods": "^1.1.2",
-    "@types/node": "^22.5.0",
-    "@types/on-finished": "^2.3.4",
-    "@types/parseurl": "^1.3.3",
-    "@types/prop-types": "^15.7.12",
-    "@types/proxy-addr": "^2.0.3",
+    "@types/node": "^22.5.1",
     "@types/qs": "^6.9.15",
     "@types/range-parser": "^1.2.7",
-    "@types/react": "^18.3.4",
-    "@types/react-dom": "^18.3.0",
-    "@types/scheduler": "^0.16.8",
     "@types/send": "^0.17.4",
     "@types/serve-static": "^1.15.7",
-    "@types/statuses": "^2.0.5",
-    "@types/type-is": "^1.6.6",
-    "@types/utils-merge": "^0.0.31",
-    "@types/vary": "^1.1.3",
-    "accepts": "^1.3.8",
-    "array-flatten": "^3.0.0",
+    "after": "0.8.2",
     "babel-loader": "^9.1.3",
-    "body-parser": "^1.20.2",
-    "content-disposition": "^0.5.4",
-    "content-type": "^1.0.5",
-    "cookie": "^0.6.0",
-    "cookie-signature": "^1.2.1",
-    "csstype": "^3.1.3",
-    "debug": "^4.3.6",
-    "depd": "^2.0.0",
-    "encodeurl": "^2.0.0",
-    "escape-html": "^1.0.3",
-    "etag": "^1.8.1",
-    "events": "^3.3.0",
-    "finalhandler": "^1.2.0",
-    "fresh": "^0.5.2",
-    "http": "^0.0.1-security",
-    "js-beautify": "^1.15.1",
-    "lodash.escaperegexp": "^4.1.2",
-    "merge-descriptors": "^2.0.0",
-    "methods": "^1.1.2",
-    "object-assign": "^4.1.1",
-    "on-finished": "^2.4.1",
-    "parseurl": "^1.3.3",
-    "path-to-regexp": "^6.2.2",
-    "proxy-addr": "^2.0.7",
-    "qs": "^6.13.0",
-    "querystring": "^0.2.1",
-    "range-parser": "^1.2.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "safe-buffer": "^5.2.1",
-    "send": "^0.18.0",
-    "serve-static": "^1.15.0",
-    "setprototypeof": "^1.2.0",
-    "statuses": "^2.0.1",
-    "type-is": "^1.6.18",
-    "utils-merge": "^1.0.1",
-    "vary": "^1.1.2"
+    "connect-redis": "3.4.2",
+    "cookie-parser": "1.4.6",
+    "cookie-session": "2.0.0",
+    "ejs": "3.1.9",
+    "eslint": "8.47.0",
+    "express-session": "1.17.2",
+    "hbs": "4.2.0",
+    "marked": "0.7.0",
+    "method-override": "3.0.0",
+    "mocha": "10.2.0",
+    "morgan": "1.10.0",
+    "nyc": "15.1.0",
+    "pbkdf2-password": "1.2.1",
+    "supertest": "6.3.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.5.4",
+    "vhost": "~3.0.2",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
   }
 }

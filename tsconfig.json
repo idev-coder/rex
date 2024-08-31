@@ -1,9 +1,12 @@
 {
     "compilerOptions": {
-        "module": "node16",
+        "module": "esnext",
         "lib": [
             "es6"
         ],
+        "declarationDir": "./lib/types",
+        "outDir": "./lib",
+        "declaration": true,
         "noImplicitAny": true,
         "noImplicitThis": true,
         "strictNullChecks": true,
@@ -11,22 +14,19 @@
         "types": [],
         "noEmit": true,
         "forceConsistentCasingInFileNames": true,
-        "jsx": "preserve",
-        "paths": {
-            "@idev-coder/rex/client": [
-                "./rex-client.d.ts"
-            ],
-            "@idev-coder/rex": [
-                "./index.d.ts"
-            ]
-        }
+        "target": "es5",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "skipLibCheck": true
     },
     "files": [
         "index.d.ts",
-        "core.d.ts",
-        "jsx-dev-runtime.d.ts",
-        "jsx-runtime.d.ts",
-        "global.d.ts",
-        "rex-client.d.ts"
+        "core.d.ts"
+    ],
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
     ]
 }
