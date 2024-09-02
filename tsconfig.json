@@ -1,32 +1,14 @@
 {
-    "compilerOptions": {
-        "module": "esnext",
-        "lib": [
-            "es6"
-        ],
-        "declarationDir": "./lib/types",
-        "outDir": "./lib",
-        "declaration": true,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "types": [],
-        "noEmit": true,
-        "forceConsistentCasingInFileNames": true,
-        "target": "es5",
-        "moduleResolution": "node",
-        "esModuleInterop": true,
-        "skipLibCheck": true
-    },
-    "files": [
-        "index.d.ts",
-        "core.d.ts"
-    ],
-    "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "target": "ES2020",                 // Set the target JavaScript version
+    "module": "ESNext",                 // Use ESNext module syntax for ESM
+    "moduleResolution": "node",         // Resolve modules in a Node-like manner
+    "outDir": "./dist",                 // Output directory
+    "allowJs": true,                    // Allow JavaScript files to be compiled
+    "skipLibCheck": true,               // Skip type checking of declaration files
+    "esModuleInterop": true,            // Enable interoperability between CommonJS and ES Modules
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],              // Include all source files
+  "exclude": ["node_modules", "dist"]   // Exclude these folders from compilation
 }

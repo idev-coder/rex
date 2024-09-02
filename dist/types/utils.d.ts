@@ -1,0 +1,11 @@
+export declare const etag: Function;
+export declare const wetag: Function;
+export declare const isAbsolute: (path: string) => boolean;
+export declare const flatten: any;
+export declare const normalizeType: (type: any) => any;
+export declare const normalizeTypes: (types: any[]) => any[];
+export declare const contentDisposition: any;
+export declare const compileETag: (val: any) => Function;
+export declare const compileQueryParser: (val: any) => Function;
+export declare const compileTrust: (val: any) => Function;
+export declare const setCharset: (type: string, charset: string) => string;
