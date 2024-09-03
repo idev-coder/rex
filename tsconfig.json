@@ -20,8 +20,7 @@
         "skipLibCheck": true
     },
     "files": [
-        "index.d.ts",
-        "core.d.ts"
+        "index.d.ts"
     ],
     "include": [
         "src/**/*"
