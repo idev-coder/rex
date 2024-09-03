@@ -4,6 +4,7 @@ import methods from 'methods';
 import * as middleware from "./middleware/init";
 import query from "./middleware/query";
 import debug from "debug";
+import View from './view';
 import * as http from 'http';
 import { compileETag, compileQueryParser, compileTrust } from './utils';
 import depd from 'depd';
@@ -58,10 +59,21 @@ application.defaultConfiguration = function () {
     this.mountpath = '/';
     // default locals
     this.locals.settings = this.settings;
+    this.set('view', View);
+    this.set('views', resolve('views'));
+    this.set('jsonp callback name', 'callback');
+    if (env === 'production') {
+        this.enable('view cache');
+    }
+    Object.defineProperty(this, 'router', {
+        get: function () {
+            throw new Error('\'app.router\' is deprecated!\nPlease see the 3.x to 4.x migration guide for details on how to update your app.');
+        }
+    });
 };
 application.lazyrouter = function () {
     if (!this._router) {
-        this._router = new Router({
+        this._router = Router({
             caseSensitive: this.enabled('case sensitive routing'),
             strict: this.enabled('strict routing')
         });

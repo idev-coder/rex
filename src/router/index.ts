@@ -1,13 +1,12 @@
 import setPrototypeOf from "setprototypeof";
-// import { Router } from "../types"
 import depd from 'depd'
 import debug from 'debug'
-// import { Router } from "../types";
 import { flatten } from 'array-flatten'
 import { Layer } from "./layer";
 import parseUrl from 'parseurl'
 import mixin from 'merge-descriptors'
 import Route from "./route";
+import { Router } from "../types";
 
 const deprecate = depd('rex')
 const log = debug('rex:router')
@@ -16,7 +15,7 @@ const slice = Array.prototype.slice;
 const objectRegExp = /^\[object (\S+)\]$/;
 const toString = Object.prototype.toString;
 
-export const proto = function (options: any): void {
+export const proto = function (options?: any): Router {
     var opts = options || {};
 
     const router: any = function (req: any, res: any, next: any): void {
@@ -403,7 +402,7 @@ proto.use = function (fn: any, ...args: any[]): any {
     return this;
 };
 
-proto.route = function (path: string):any {
+proto.route = function (path: string): any {
     var route = new Route(path);
 
     var layer = new Layer(path, {

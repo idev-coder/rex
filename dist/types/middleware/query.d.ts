@@ -1,1 +1,1 @@
-export default function (options: any): Function;
+export default function (options?: any): Function;

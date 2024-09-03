@@ -52,15 +52,15 @@ response.send = function (body: any, ...args: any[]): any {
     var app = this.app;
 
     // allow status / body
-    if (arguments.length === 2) {
+    if (args.length === 2) {
         // response.send(body, status) backwards compat
-        if (typeof arguments[0] !== 'number' && typeof arguments[1] === 'number') {
+        if (typeof args[0] !== 'number' && typeof args[1] === 'number') {
             deprecate('response.send(body, status): Use response.status(status).send(body) instead');
-            this.statusCode = arguments[1];
+            this.statusCode = args[1];
         } else {
             deprecate('response.send(status, body): Use response.status(status).send(body) instead');
-            this.statusCode = arguments[0];
-            chunk = arguments[1];
+            this.statusCode = args[0];
+            chunk = args[1];
         }
     }
 
@@ -173,15 +173,15 @@ response.json = function (obj: any, ...args: any[]): any {
     var val = obj;
 
     // allow status / body
-    if (arguments.length === 2) {
+    if (args.length === 2) {
         // response.json(body, status) backwards compat
-        if (typeof arguments[1] === 'number') {
+        if (typeof args[1] === 'number') {
             deprecate('response.json(obj, status): Use response.status(status).json(obj) instead');
-            this.statusCode = arguments[1];
+            this.statusCode = args[1];
         } else {
             deprecate('response.json(status, obj): Use response.status(status).json(obj) instead');
-            this.statusCode = arguments[0];
-            val = arguments[1];
+            this.statusCode = args[0];
+            val = args[1];
         }
     }
 
@@ -204,15 +204,15 @@ response.jsonp = function (obj: any, ...args: any[]): any {
     var val = obj;
 
     // allow status / body
-    if (arguments.length === 2) {
+    if (args.length === 2) {
         // response.jsonp(body, status) backwards compat
-        if (typeof arguments[1] === 'number') {
+        if (typeof args[1] === 'number') {
             deprecate('response.jsonp(obj, status): Use response.status(status).jsonp(obj) instead');
-            this.statusCode = arguments[1];
+            this.statusCode = args[1];
         } else {
             deprecate('response.jsonp(status, obj): Use response.status(status).jsonp(obj) instead');
-            this.statusCode = arguments[0];
-            val = arguments[1];
+            this.statusCode = args[0];
+            val = args[1];
         }
     }
 
@@ -300,7 +300,7 @@ response.sendFile = function (path: any, options: any, callback: any): void {
     var file = send(req, pathname, opts);
 
     // transfer
-    sendfile(res, file, opts, function (err) {
+    sendfile(res, file, opts, function (err:any) {
         if (done) return done(err);
         if (err && err.code === 'EISDIR') return next();
 
@@ -328,7 +328,7 @@ response.sendfile = function (path: any, options: any, callback: any): void {
     var file = send(req, path, opts);
 
     // transfer
-    sendfile(res, file, opts, function (err) {
+    sendfile(res, file, opts, function (err:any) {
         if (done) return done(err);
         if (err && err.code === 'EISDIR') return next();
 
@@ -364,7 +364,7 @@ response.download = function (path: any, filename: any, options: any, callback: 
     }
 
     // set Content-Disposition when file is sent
-    var headers = {
+    var headers:any = {
         'Content-Disposition': contentDisposition(name || path)
     };
 
@@ -372,7 +372,7 @@ response.download = function (path: any, filename: any, options: any, callback: 
     if (opts && opts.headers) {
         var keys = Object.keys(opts.headers)
         for (var i = 0; i < keys.length; i++) {
-            var key = keys[i]
+            var key:string = keys[i]
             if (key.toLowerCase() !== 'content-disposition') {
                 headers[key] = opts.headers[key]
             }
@@ -452,7 +452,7 @@ response.append = function (field: string, val: string | any[]): http.ServerResp
 };
 
 response.set = response.header = function (field: string | any, val: string | any[], ...args: any[]): http.ServerResponse {
-    if (arguments.length === 2) {
+    if (args.length === 2) {
         var value = Array.isArray(val)
             ? val.map(String)
             : String(val);
@@ -463,7 +463,7 @@ response.set = response.header = function (field: string | any, val: string | an
                 throw new TypeError('Content-Type cannot be set to an Array');
             }
             if (!charsetRegExp.test(value)) {
-                var charset = mime.charsets.lookup(value.split(';')[0]);
+                var charset = mime.charsets.lookup(value.split(';')[0],"");
                 if (charset) value += '; charset=' + charset.toLowerCase();
             }
         }
@@ -496,7 +496,7 @@ response.clearCookie = function (name: string, options?: any): http.ServerRespon
 };
 
 response.cookie = function (name: string, value: string | any, options?: any): http.ServerResponse {
-    var opts = merge({}, options);
+    var opts:any = merge({}, options);
     var secret = this.req.secret;
     var signed = opts.signed;
 
@@ -545,17 +545,17 @@ response.location = function (url: string): http.ServerResponse {
 
 response.redirect = function (url: any, ...args: any[]): void {
     var address = url;
-    var body;
+    var body:any;
     var status = 302;
 
     // allow status / url
-    if (arguments.length === 2) {
-        if (typeof arguments[0] === 'number') {
-            status = arguments[0];
-            address = arguments[1];
+    if (args.length === 2) {
+        if (typeof args[0] === 'number') {
+            status = args[0];
+            address = args[1];
         } else {
             deprecate('response.redirect(url, status): Use response.redirect(status, url) instead');
-            status = arguments[1];
+            status = args[1];
         }
     }
 
@@ -589,7 +589,7 @@ response.redirect = function (url: any, ...args: any[]): void {
     }
 };
 
-response.vary = function (field) {
+response.vary = function (field: any[] | string): http.ServerResponse {
     // checks for back-compat
     if (!field || (Array.isArray(field) && !field.length)) {
         deprecate('response.vary(): Provide a field name');
@@ -618,7 +618,7 @@ response.render = function (view: any, options: any, callback: any): void {
     opts._locals = self.locals;
 
     // default callback to respond
-    done = done || function (err, str) {
+    done = done || function (err:any, str:any) {
         if (err) return req.next(err);
         self.send(str);
     };
@@ -657,7 +657,7 @@ function stringify(value: any, replacer: any, spaces: number, escape: boolean): 
 
 function sendfile(res: any, file: any, options: any, callback: any): void {
     var done = false;
-    var streaming;
+    var streaming:any;
 
     // request aborted
     function onaborted() {
@@ -680,7 +680,7 @@ function sendfile(res: any, file: any, options: any, callback: any): void {
     }
 
     // errors
-    function onerror(err) {
+    function onerror(err:any) {
         if (done) return;
         done = true;
         callback(err);
@@ -699,7 +699,7 @@ function sendfile(res: any, file: any, options: any, callback: any): void {
     }
 
     // finished
-    function onfinish(err) {
+    function onfinish(err:any) {
         if (err && err.code === 'ECONNRESET') return onaborted();
         if (err) return onerror(err);
         if (done) return;
@@ -730,7 +730,7 @@ function sendfile(res: any, file: any, options: any, callback: any): void {
 
     if (options.headers) {
         // set headers on successful transfer
-        file.on('headers', function headers(res) {
+        file.on('headers', function headers(res:any) {
             var obj = options.headers;
             var keys = Object.keys(obj);
 

@@ -33,6 +33,7 @@ const methods_1 = __importDefault(require("methods"));
 const middleware = __importStar(require("./middleware/init"));
 const query_1 = __importDefault(require("./middleware/query"));
 const debug_1 = __importDefault(require("debug"));
+const view_1 = __importDefault(require("./view"));
 const http = __importStar(require("http"));
 const utils_1 = require("./utils");
 const depd_1 = __importDefault(require("depd"));
@@ -87,10 +88,21 @@ exports.application.defaultConfiguration = function () {
     this.mountpath = '/';
     // default locals
     this.locals.settings = this.settings;
+    this.set('view', view_1.default);
+    this.set('views', resolve('views'));
+    this.set('jsonp callback name', 'callback');
+    if (env === 'production') {
+        this.enable('view cache');
+    }
+    Object.defineProperty(this, 'router', {
+        get: function () {
+            throw new Error('\'app.router\' is deprecated!\nPlease see the 3.x to 4.x migration guide for details on how to update your app.');
+        }
+    });
 };
 exports.application.lazyrouter = function () {
     if (!this._router) {
-        this._router = new router_1.default({
+        this._router = (0, router_1.default)({
             caseSensitive: this.enabled('case sensitive routing'),
             strict: this.enabled('strict routing')
         });

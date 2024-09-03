@@ -74,16 +74,16 @@ exports.response.send = function (body, ...args) {
     // settings
     var app = this.app;
     // allow status / body
-    if (arguments.length === 2) {
+    if (args.length === 2) {
         // response.send(body, status) backwards compat
-        if (typeof arguments[0] !== 'number' && typeof arguments[1] === 'number') {
+        if (typeof args[0] !== 'number' && typeof args[1] === 'number') {
             deprecate('response.send(body, status): Use response.status(status).send(body) instead');
-            this.statusCode = arguments[1];
+            this.statusCode = args[1];
         }
         else {
             deprecate('response.send(status, body): Use response.status(status).send(body) instead');
-            this.statusCode = arguments[0];
-            chunk = arguments[1];
+            this.statusCode = args[0];
+            chunk = args[1];
         }
     }
     // disambiguate response.send(status) and response.send(status, num)
@@ -186,16 +186,16 @@ exports.response.send = function (body, ...args) {
 exports.response.json = function (obj, ...args) {
     var val = obj;
     // allow status / body
-    if (arguments.length === 2) {
+    if (args.length === 2) {
         // response.json(body, status) backwards compat
-        if (typeof arguments[1] === 'number') {
+        if (typeof args[1] === 'number') {
             deprecate('response.json(obj, status): Use response.status(status).json(obj) instead');
-            this.statusCode = arguments[1];
+            this.statusCode = args[1];
         }
         else {
             deprecate('response.json(status, obj): Use response.status(status).json(obj) instead');
-            this.statusCode = arguments[0];
-            val = arguments[1];
+            this.statusCode = args[0];
+            val = args[1];
         }
     }
     // settings
@@ -213,16 +213,16 @@ exports.response.json = function (obj, ...args) {
 exports.response.jsonp = function (obj, ...args) {
     var val = obj;
     // allow status / body
-    if (arguments.length === 2) {
+    if (args.length === 2) {
         // response.jsonp(body, status) backwards compat
-        if (typeof arguments[1] === 'number') {
+        if (typeof args[1] === 'number') {
             deprecate('response.jsonp(obj, status): Use response.status(status).jsonp(obj) instead');
-            this.statusCode = arguments[1];
+            this.statusCode = args[1];
         }
         else {
             deprecate('response.jsonp(status, obj): Use response.status(status).jsonp(obj) instead');
-            this.statusCode = arguments[0];
-            val = arguments[1];
+            this.statusCode = args[0];
+            val = args[1];
         }
     }
     // settings
@@ -422,7 +422,7 @@ exports.response.append = function (field, val) {
     return this.set(field, value);
 };
 exports.response.set = exports.response.header = function (field, val, ...args) {
-    if (arguments.length === 2) {
+    if (args.length === 2) {
         var value = Array.isArray(val)
             ? val.map(String)
             : String(val);
@@ -432,7 +432,7 @@ exports.response.set = exports.response.header = function (field, val, ...args) 
                 throw new TypeError('Content-Type cannot be set to an Array');
             }
             if (!charsetRegExp.test(value)) {
-                var charset = mime.charsets.lookup(value.split(';')[0]);
+                var charset = mime.charsets.lookup(value.split(';')[0], "");
                 if (charset)
                     value += '; charset=' + charset.toLowerCase();
             }
@@ -503,14 +503,14 @@ exports.response.redirect = function (url, ...args) {
     var body;
     var status = 302;
     // allow status / url
-    if (arguments.length === 2) {
-        if (typeof arguments[0] === 'number') {
-            status = arguments[0];
-            address = arguments[1];
+    if (args.length === 2) {
+        if (typeof args[0] === 'number') {
+            status = args[0];
+            address = args[1];
         }
         else {
             deprecate('response.redirect(url, status): Use response.redirect(status, url) instead');
-            status = arguments[1];
+            status = args[1];
         }
     }
     // Set location header

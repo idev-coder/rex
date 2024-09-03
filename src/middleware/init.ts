@@ -1,6 +1,6 @@
 import setPrototypeOf from "setprototypeof";
 
-export const init = function (app: any): Function {
+export const init = function (app?: any): Function {
     return function (req: any, res: any, next: any): void {
         if (app.enabled('x-powered-by')) res.setHeader('X-Powered-By', 'Rex');
 

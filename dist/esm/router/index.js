@@ -1,8 +1,6 @@
 import setPrototypeOf from "setprototypeof";
-// import { Router } from "../types"
 import depd from 'depd';
 import debug from 'debug';
-// import { Router } from "../types";
 import { flatten } from 'array-flatten';
 import { Layer } from "./layer";
 import parseUrl from 'parseurl';

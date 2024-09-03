@@ -2,8 +2,8 @@ import merge from "utils-merge";
 import qs from 'qs'
 import parseUrl from 'parseurl'
 
-export default function (options: any): Function {
-    var opts = merge({}, options)
+export default function (options?: any): Function {
+    var opts:any = merge({}, options)
     var queryparse = qs.parse;
 
     if (typeof options === 'function') {

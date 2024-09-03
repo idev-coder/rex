@@ -7,7 +7,8 @@
     "allowJs": true,                    // Allow JavaScript files to be compiled
     "skipLibCheck": true,               // Skip type checking of declaration files
     "esModuleInterop": true,            // Enable interoperability between CommonJS and ES Modules
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    // "strict": true,
   },
   "include": ["src/**/*"],              // Include all source files
   "exclude": ["node_modules", "dist"]   // Exclude these folders from compilation

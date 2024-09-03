@@ -24,7 +24,7 @@ const hasOwnProperty = Object.prototype.hasOwnProperty
 const slice = Array.prototype.slice;
 const trustProxyDefaultSymbol = '@@symbol:trust_proxy_default';
 
-application.init = function (): void {
+application.init = function () {
     this.cache = {};
     this.engines = {};
     this.settings = {};
@@ -51,7 +51,7 @@ application.defaultConfiguration = function (): void {
 
     log('booting in %s mode', env);
 
-    this.on('mount', function onmount(parent) {
+    this.on('mount', function onmount(parent:any) {
         // inherit trust proxy
         if (this.settings[trustProxyDefaultSymbol] === true
             && typeof parent.settings['trust proxy fn'] === 'function') {
@@ -74,11 +74,25 @@ application.defaultConfiguration = function (): void {
 
     // default locals
     this.locals.settings = this.settings;
+
+    this.set('view', View);
+    this.set('views', resolve('views'));
+    this.set('jsonp callback name', 'callback');
+
+    if (env === 'production') {
+        this.enable('view cache');
+    }
+
+    Object.defineProperty(this, 'router', {
+        get: function () {
+            throw new Error('\'app.router\' is deprecated!\nPlease see the 3.x to 4.x migration guide for details on how to update your app.');
+        }
+    });
 }
 
 application.lazyrouter = function (): void {
     if (!this._router) {
-        this._router = new Router({
+        this._router =  Router({
             caseSensitive: this.enabled('case sensitive routing'),
             strict: this.enabled('strict routing')
         });

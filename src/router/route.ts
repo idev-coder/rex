@@ -2,13 +2,14 @@ import debug from "debug";
 import { flatten } from "array-flatten";
 import { Layer } from "./layer";
 import methods from 'methods'
+import { IRoute } from "../types";
 
 const log = debug('rex:application')
 
 const slice = Array.prototype.slice;
 const toString = Object.prototype.toString;
 
-export const Route = function (path: string): void {
+export const Route = function (path: string) {
     this.path = path;
     this.stack = [];
 
@@ -118,7 +119,7 @@ Route.prototype.all = function (...args: any[]) {
             throw new TypeError(msg);
         }
 
-        var layer:any = Layer('/', {}, handle);
+        var layer: any = Layer('/', {}, handle);
         layer.method = undefined;
 
         this.methods._all = true;
@@ -129,7 +130,7 @@ Route.prototype.all = function (...args: any[]) {
 };
 
 methods.forEach(function (method: any): void {
-    Route.prototype[method] = function () {
+    Route.prototype[method] = function (): IRoute {
         var handles = flatten(slice.call(arguments));
 
         for (var i = 0; i < handles.length; i++) {

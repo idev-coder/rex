@@ -1,5 +1,6 @@
+import { Router } from "../types";
 export declare const proto: {
-    (options: any): void;
+    (options?: any): Router;
     param(name: string, fn: Function): void;
     handle(req: any, res: any, out: any): void;
     process_params(layer: any, called: any, req: any, res: any, done: any): any;

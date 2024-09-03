@@ -1,1 +1,1 @@
-export declare const init: (app: any) => Function;
+export declare const init: (app?: any) => Function;

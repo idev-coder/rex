@@ -5,10 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.proto = void 0;
 const setprototypeof_1 = __importDefault(require("setprototypeof"));
-// import { Router } from "../types"
 const depd_1 = __importDefault(require("depd"));
 const debug_1 = __importDefault(require("debug"));
-// import { Router } from "../types";
 const array_flatten_1 = require("array-flatten");
 const layer_1 = require("./layer");
 const parseurl_1 = __importDefault(require("parseurl"));
