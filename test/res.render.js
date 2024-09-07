@@ -56,7 +56,7 @@ describe('res', function(){
       app.locals.user = { name: 'tobi' };
 
       app.use(function(req, res){
-        res.render(path.join(__dirname, 'fixtures', 'user'))
+        res.render(path.join(__dirname, 'fixtures', 'user'),{})
       });
 
       request(app)
