@@ -17,6 +17,7 @@
     "node": "20 || >=22"
   },
   "scripts": {
+    "npm:deploy":"npm publish --access public",
     "build": "rimraf dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript"
   },
   "keywords": [
