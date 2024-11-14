@@ -4,6 +4,15 @@
   "main": "dist/rex.cjs.js",
   "module": "dist/rex.esm.js",
   "types": "dist/rex.d.ts",
+  "exports": {
+    "./*": {
+      "types": "./dist/rex.d.ts",
+      "require": "./dist/rex.cjs.js",
+      "import": "./dist/rex.esm.js",
+      "default": "./dist/rex.esm.js"
+    },
+    "./package.json": "./package.json"
+  },
   "engines": {
     "node": "20 || >=22"
   },
@@ -23,6 +32,10 @@
   ],
   "author": "Natthapat Piasangka <n.devs260340@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idev-coder/rex.git"
+  },
   "description": "Fast, unopinionated, minimalist web framework",
   "files": [
     "dist/"
