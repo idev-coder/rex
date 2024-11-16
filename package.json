@@ -1,6 +1,6 @@
 {
   "name": "@idev-coder/rex",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "main": "dist/rex.cjs.js",
   "module": "dist/rex.esm.js",
   "types": "dist/rex.d.ts",
@@ -35,8 +35,7 @@
   "dependencies": {
     "accepts": "^1.3.8",
     "express": "^4.21.1",
-    "merge-descriptors": "^2.0.0",
-    "router": "^1.3.8"
+    "merge-descriptors": "^2.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
