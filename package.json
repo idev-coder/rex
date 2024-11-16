@@ -1,6 +1,6 @@
 {
   "name": "@idev-coder/rex",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/rex.cjs.js",
   "module": "dist/rex.esm.js",
   "types": "dist/rex.d.ts",
