@@ -1,18 +1,9 @@
 {
   "name": "@idev-coder/rex",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/rex.cjs.js",
   "module": "dist/rex.esm.js",
   "types": "dist/rex.d.ts",
-  "exports": {
-    "./*": {
-      "types": "./dist/rex.d.ts",
-      "require": "./dist/rex.cjs.js",
-      "import": "./dist/rex.esm.js",
-      "default": "./dist/rex.esm.js"
-    },
-    "./package.json": "./package.json"
-  },
   "engines": {
     "node": "20 || >=22"
   },
